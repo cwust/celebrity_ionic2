@@ -1,0 +1,24 @@
+page-create-game {
+    #container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        #nomeJogoList {
+            margin: 24px 12px 48px 12px;
+        }
+
+        #bottom {
+            flex-grow: 1;
+            background-color: #EEE;
+            text-align: right;
+
+            #nextPageButton {
+                display: inline-block;
+                position: relative;
+                top: -30px;
+                right: 20px;
+            }
+        }
+    }
+}

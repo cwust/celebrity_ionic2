@@ -5,12 +5,34 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { OpeningPage } from '../pages/opening/opening';
+import { CreateGamePage } from '../pages/create-game/create-game';
+import { ChooseGamePage } from '../pages/choose-game/choose-game';
+import { PreGameStagePage } from '../pages/pre-game-stage/pre-game-stage';
+import { ChooseCelebritiesPages } from '../pages/choose-celebrities/choose-celebrities'
+
+import { CelebrityStore } from '../store/celebrity-store'
+import { BackendConnection } from '../services/backend-connection'
+import { CelebrityService } from '../services/celebrity-service'
+
+const appPages = [
+  OpeningPage,
+  CreateGamePage,
+  ChooseGamePage,
+  PreGameStagePage,
+  ChooseCelebritiesPages
+]
+
+const providers = [
+  CelebrityStore,
+  BackendConnection,
+  CelebrityService
+]
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    ...appPages
   ],
   imports: [
     BrowserModule,
@@ -19,12 +41,13 @@ import { HomePage } from '../pages/home/home';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    ...appPages
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ...providers
   ]
 })
 export class AppModule {}

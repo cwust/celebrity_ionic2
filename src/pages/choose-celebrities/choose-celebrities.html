@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Escolha as celebridades</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content >
+  <ion-card *ngFor="let celebrity of celebrities">
+    <ion-list>
+      <ion-item class="celebrityItem" text-center>
+        <ion-label large>{{celebrity}}</ion-label>
+        <button ion-button item-end clear large color="danger" (click)="removeCelebrity(celebrity)"><ion-icon name="trash"></ion-icon></button>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <ion-fab  right bottom [hidden]="celebrities.length < maxCelebritiesPerPlayer">
+    <button ion-fab (click)="onNextPageClick()"><ion-icon name="checkmark"></ion-icon></button> 
+  </ion-fab>
+</ion-content>
+<ion-footer [hidden]="celebrities.length >= maxCelebritiesPerPlayer">
+  <ion-toolbar>
+    <ion-input type="text" placeholder="Digite uma celebridade" [(ngModel)]="this.celebrityTextInput"></ion-input>
+    <ion-buttons end>
+      <button ion-fab small (click)="addCelebrity()" [disabled]="!this.celebrityTextInput || this.celebrityTextInput.length == 0" ><ion-icon name="send"></ion-icon></button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

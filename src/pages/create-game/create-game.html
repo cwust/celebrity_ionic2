@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Criar um jogo</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content >
+  <div id="container">
+    <ion-list id="nomeJogoList">
+      <ion-item>
+        <ion-input type="text" placeholder="Digite o nome do jogo" [(ngModel)]="gameName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="Digite o seu nome" [(ngModel)]="playerName"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div id="bottom">
+        <button id="nextPageButton" ion-fab (click)="onNextPageClick()"><ion-icon name="checkmark"></ion-icon></button> 
+    </div>
+  </div>
+</ion-content>
