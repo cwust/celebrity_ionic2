@@ -8,51 +8,34 @@ export class CelebrityService {
 
     }
 
+    private sendMessage(msg:string, params: any) {
+        return new Promise((resolve, reject) => {
+            this.connection.sendMessage(
+                msg, 
+                params, 
+                (result) => resolve(result),
+                (error) => reject(error)
+            );
+        });                                        
+    }
+
     public connect() {
         this.connection.connect();
     }
 
     public createGame(gameName:string, playerName: string) : Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.connection.sendMessage(
-                'createGame', 
-                {gameName, playerName}, 
-                (result) => resolve(result),
-                (error) => reject(error)
-            );
-        });
+        return this.sendMessage('createGame', {gameName, playerName});
     }
 
     public listGames(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.connection.sendMessage(
-                'listGames', 
-                {}, 
-                (result) => resolve(result),
-                (error) => reject(error)
-            );
-        });        
+        return this.sendMessage('listGames', {});
     }
     public connectToGame(gameId: number, playerName: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.connection.sendMessage(
-                'connectToGame', 
-                {gameId, playerName}, 
-                (result) => resolve(result),
-                (error) => reject(error)
-            );
-        });        
+        return this.sendMessage('connectToGame', {gameId, playerName});
     }
 
     public getGameTeams(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.connection.sendMessage(
-                'getGameTeams', 
-                {}, 
-                (result) => resolve(result),
-                (error) => reject(error)
-            );
-        });                
+        return this.sendMessage('getGameTeams', {});
     }
 
     public onPlayersUpdated(cb: any) {
@@ -64,24 +47,19 @@ export class CelebrityService {
     }
 
     public changePlayerTeam(playerId: number): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.connection.sendMessage(
-                'changePlayerTeam', 
-                {playerId}, 
-                (result) => resolve(result),
-                (error) => reject(error)
-            );
-        });                        
+        return this.sendMessage('changePlayerTeam', {playerId});
     }
 
     public setCurrentPlayerCelebrities(celebrities: string[]): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.connection.sendMessage(
-                'setCurrentPlayerCelebrities', 
-                {celebrities}, 
-                (result) => resolve(result),
-                (error) => reject(error)
-            );
-        });                                
+        return this.sendMessage('setCurrentPlayerCelebrities', {celebrities});
     }
+
+    public leaveGame() : Promise<any> {
+        return this.sendMessage('kickPlayerFromGame', {}); 
+        //note that we use kick player, since this will have the desired effect
+    }
+
+    public kickPlayerFromGame(playerId: number) : Promise<any> {
+        return this.sendMessage('kickPlayerFromGame', {playerId}); 
+    }    
 }

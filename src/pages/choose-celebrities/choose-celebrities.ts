@@ -28,7 +28,7 @@ export class ChooseCelebritiesPages {
   }
 
   onNextPageClick() {
-    this.store.sendCelebrities(this.celebrities)
+    this.service.setCurrentPlayerCelebrities(this.celebrities)
     .then(() => console.log('NEXT'));
   }
 
