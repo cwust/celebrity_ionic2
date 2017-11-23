@@ -5,13 +5,16 @@ import { ChooseGamePage } from '../choose-game/choose-game'
 
 import { BackendConnection } from '../../services/backend-connection';
 
+import { Http, Response, RequestOptions } from '@angular/http';
+
+
 @Component({
   selector: 'page-opening',
   templateUrl: 'opening.html'
 })
 export class OpeningPage {
 
-  constructor(public navCtrl: NavController, public conn: BackendConnection) {
+  constructor(public navCtrl: NavController, public conn: BackendConnection, private http:Http) {
     conn.connect();    
     conn.onBroadcastedMessage('PLAYERS_UPDATED', (params) => console.log('PLAYERS_UPDATED', params));
   }
@@ -25,7 +28,9 @@ export class OpeningPage {
   }
 
   onCreateGameClick() {
-    this.conn.sendMessage('createGame', {gameName: 'Meu Jogo', playerName: 'Player 1'}, (result) => console.log('createGame', result));    
+    //this.conn.sendMessage('createGame', {gameName: 'Meu Jogo', playerName: 'Player 1'}, (result) => console.log('createGame', result));    
+    let options = new RequestOptions({withCredentials: true });
+    this.http.post('http://127.0.0.1:3000/ping', {x: 'aaa'}, options).subscribe((res:Response) => console.log(res.json()));
   }
 
   onListGamesClick() {

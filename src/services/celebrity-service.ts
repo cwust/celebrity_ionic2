@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BackendConnection } from './backend-connection'
+import { Http } from '@angular/http';
 
 @Injectable()
 export class CelebrityService {
 
-    constructor(private connection: BackendConnection) {
+    constructor(private connection: BackendConnection, private http: Http) {
 
     }
 
